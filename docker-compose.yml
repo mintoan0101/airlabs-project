@@ -14,15 +14,26 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   app:
     image: minhtoan0101/airlabs-project:latest
     container_name: airlabs-app
     restart: always
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     ports:
       - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/airlabsdb?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: airlabs
+      SPRING_DATASOURCE_PASSWORD: 0101
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
 volumes:
   mysql_data:
