@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AirLabs Flight Schedule</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <script src="/js/index.js" defer></script>
+    </head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">✈️ Flight Schedule</h2>
+
+    <div class="card p-4">
+        <form id="searchForm">
+            <div class="row">
+                <div class="col-md-5">
+                    <label class="form-label">
+                        Select Country:
+                        <span id="countrySpinner" class="spinner-border spinner-border-sm text-primary d-none ms-2"></span>
+                    </label>
+                    <select id="countrySelect" class="form-select">
+                        <option value="">-- Loading list... --</option>
+                    </select>
+                </div>
+
+                <div class="col-md-5">
+                    <label class="form-label">
+                        Select Airport:
+                        <span id="airportSpinner" class="spinner-border spinner-border-sm text-primary d-none ms-2"></span>
+                    </label>
+                    <select id="airportSelect" name="airportCode" class="form-select" required>
+                        <option value="">-- Please select a country first --</option>
+                    </select>
+                    <div id="airportHelper" class="form-text"></div>
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Show Schedule</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div id="flightsContainer"></div>
+</div>
+
+</body>
+</html>
